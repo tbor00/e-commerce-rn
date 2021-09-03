@@ -6,12 +6,14 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { loginUserApi } from '../../api/user'
 import Toast from 'react-native-root-toast'
+import useAuth from '../../hooks/useAuth'
 
 const LoginForm = ({ setShowLogin }: { setShowLogin?: any }) => {
     const initialValues: { identifier: string; password: string } = {
         identifier: '',
         password: ''
     }
+    const { login } = useAuth()
     const [loading, setLoading] = useState(false)
 
     const validationSchema = {
@@ -27,7 +29,7 @@ const LoginForm = ({ setShowLogin }: { setShowLogin?: any }) => {
             loginUserApi(formData)
                 .then((response) => {
                     // setShowLogin((prev: boolean) => !prev)
-                    console.log(response.data.jwt)
+                    login(response.data)
                     setLoading(false)
                 })
                 .catch((error) => {
