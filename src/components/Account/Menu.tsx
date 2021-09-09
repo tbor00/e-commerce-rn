@@ -25,14 +25,30 @@ export default function Menu() {
         <>
             <List.Section>
                 <List.Subheader>Mi cuenta</List.Subheader>
-                <List.Item title="Cambiar Nombre" description="Cambiar el nombre de tu cuenta" left={(props) => <List.Icon {...props} icon="face" />} />
-                <List.Item title="Cambiar Email" description="Cambiar el email de tu cuenta" left={(props) => <List.Icon {...props} icon="at" />} />
+                <List.Item
+                    title="Cambiar Nombre"
+                    description="Cambiar el nombre de tu cuenta"
+                    left={(props) => <List.Icon {...props} icon="face" />}
+                    onPress={() => navigation.navigate('change-name-account' as any)}
+                />
+                <List.Item
+                    title="Cambiar Email"
+                    description="Cambiar el email de tu cuenta"
+                    left={(props) => <List.Icon {...props} icon="at" />}
+                    onPress={() => navigation.navigate('change-email-account' as any)}
+                />
                 <List.Item
                     title="Cambiar Username"
                     description="Cambiar el nombre de usuario de tu cuenta"
                     left={(props) => <List.Icon {...props} icon="sim" />}
+                    onPress={() => navigation.navigate('change-username-account' as any)}
                 />
-                <List.Item title="Cambiar password" description="Cambiar la password de tu cuenta" left={(props) => <List.Icon {...props} icon="key" />} />
+                <List.Item
+                    title="Cambiar password"
+                    description="Cambiar la password de tu cuenta"
+                    left={(props) => <List.Icon {...props} icon="key" />}
+                    onPress={() => navigation.navigate('change-password-account' as any)}
+                />
                 <List.Item title="Mis direcciones" description="Administra tus direcciones de envio" left={(props) => <List.Icon {...props} icon="map" />} />
             </List.Section>
             <List.Section>

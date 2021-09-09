@@ -23,7 +23,7 @@ const AppNavigation = () => {
             case 'cart':
                 iconName = 'shopping-cart'
                 break
-            case 'account':
+            case 'account-stack':
                 iconName = 'bars'
                 break
             default:
@@ -48,7 +48,7 @@ const AppNavigation = () => {
                 <Tab.Screen name="home" component={Home} options={{ title: 'Inicio' }} />
                 <Tab.Screen name="favorites" component={Favorites} options={{ title: 'Favoritos' }} />
                 <Tab.Screen name="cart" component={Cart} options={{ title: 'Carrito' }} />
-                <Tab.Screen name="account" component={AccountStack} options={{ title: 'Cuenta' }} />
+                <Tab.Screen name="account-stack" component={AccountStack} options={{ title: 'Cuenta' }} />
             </Tab.Navigator>
         </NavigationContainer>
     )
