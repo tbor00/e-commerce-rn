@@ -7,7 +7,7 @@ import { colors } from '../styles/index'
 import Home from '../screens/Home'
 import Favorites from '../screens/Favorites'
 import Cart from '../screens/Cart'
-import Account from '../screens/Account'
+import AccountStack from './AccountStack'
 
 const AppNavigation = () => {
     const setIcon = (route: any, routerStatus: any) => {
@@ -48,7 +48,7 @@ const AppNavigation = () => {
                 <Tab.Screen name="home" component={Home} options={{ title: 'Inicio' }} />
                 <Tab.Screen name="favorites" component={Favorites} options={{ title: 'Favoritos' }} />
                 <Tab.Screen name="cart" component={Cart} options={{ title: 'Carrito' }} />
-                <Tab.Screen name="account" component={Account} options={{ title: 'Cuenta' }} />
+                <Tab.Screen name="account" component={AccountStack} options={{ title: 'Cuenta' }} />
             </Tab.Navigator>
         </NavigationContainer>
     )
