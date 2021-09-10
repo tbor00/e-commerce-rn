@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react'
-import { useFocusEffect } from '@react-navigation/native'
 import { ScrollView } from 'react-native'
+import { useFocusEffect } from '@react-navigation/native'
 import { colors } from '../../styles/index'
 import Search from '../../components/Search'
 import StatusBarCustom from '../../components/StatusBarCustom'
@@ -16,14 +16,13 @@ export default function Account() {
     const { token } = auth as any
 
     const findMeUser = useCallback(() => {
-        getMeAPi(token).then((response) => {
-            setUser(response.data)
-        })
+        ;(async () => {
+            const result = await getMeAPi(token)
+            setUser(result)
+        })()
     }, [])
 
-    useFocusEffect(() => {
-        findMeUser()
-    })
+    useFocusEffect(findMeUser)
 
     return (
         <>

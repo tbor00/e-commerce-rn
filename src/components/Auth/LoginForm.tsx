@@ -26,18 +26,15 @@ const LoginForm = ({ setShowLogin }: { setShowLogin?: any }) => {
         validationSchema: Yup.object(validationSchema),
         onSubmit: async (formData) => {
             setLoading(true)
-            loginUserApi(formData)
-                .then((response) => {
-                    // setShowLogin((prev: boolean) => !prev)
-                    login(response.data)
-                    setLoading(false)
+            const result = await loginUserApi(formData)
+            if (result.error) {
+                Toast.show('Error al intentar loguear, intente nuevamente!', {
+                    position: Toast.positions.CENTER
                 })
-                .catch((error) => {
-                    Toast.show('Error al intentar loguear, intente nuevamente!', {
-                        position: Toast.positions.CENTER
-                    })
-                    setLoading(false)
-                })
+            } else {
+                login(result)
+            }
+            setLoading(false)
         }
     })
 

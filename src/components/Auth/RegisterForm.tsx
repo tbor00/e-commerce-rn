@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 import { TextInput, Button } from 'react-native-paper'
 import { formStyles } from '../../styles/index'
 import { useFormik } from 'formik'
@@ -30,16 +30,15 @@ export default function RegisterForm({ setShowLogin }: { setShowLogin?: any }) {
         validationSchema: Yup.object(validationSchema),
         onSubmit: async (formData) => {
             setLoading(true)
-            registerUserApi(formData)
-                .then((response) => {
-                    setShowLogin((prev: boolean) => !prev)
+            const result = await registerUserApi(formData)
+            if (result.error) {
+                Toast.show('Error, Intentalo Nuevamente', {
+                    position: Toast.positions.CENTER
                 })
-                .catch((error) => {
-                    Toast.show('Error, Intentalo Nuevamente', {
-                        position: Toast.positions.CENTER
-                    })
-                    setLoading(false)
-                })
+            } else {
+                setShowLogin((prev: boolean) => !prev)
+            }
+            setLoading(false)
         }
     })
 
