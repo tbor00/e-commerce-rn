@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native'
 // Colors general
 export const colors = {
     primary: '#0098d3',
+    danger: '#B61919',
     dark: '#000',
     fontLight: '#fff',
     bgLight: '#fff',

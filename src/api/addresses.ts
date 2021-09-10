@@ -8,3 +8,7 @@ export const getAdressesApi = (auth: any) => {
 export const addAddressApi = (auth: any, address: Address) => {
     return HttpFetch('POST', `${REACT_APP_CONTENT}/addresses`, { user: auth.idUser, ...address }, auth.token)
 }
+
+export const deleteAdressApi = (auth: any, idAddress: string | number | undefined) => {
+    return HttpFetch('DELETE', `${REACT_APP_CONTENT}/addresses/${idAddress}`, undefined, auth.token)
+}

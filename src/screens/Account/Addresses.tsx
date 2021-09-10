@@ -1,11 +1,12 @@
 import React, { useCallback, useState } from 'react'
-import { View, Text, StyleSheet, ScrollView, TouchableWithoutFeedback } from 'react-native'
+import { View, Text, StyleSheet, ScrollView, TouchableWithoutFeedback, Alert } from 'react-native'
 import { IconButton } from 'react-native-paper'
 import { useFocusEffect } from '@react-navigation/native'
-import { getAdressesApi } from '../../api/addresses'
+import { getAdressesApi, deleteAdressApi } from '../../api/addresses'
 import useAuth from '../../hooks/useAuth'
 import Loading from '../../components/Loading'
 import { useNavigation } from '@react-navigation/native'
+import AddressList from '../../components/Address/AddressList'
 
 export interface Address {
     title: string
@@ -16,12 +17,40 @@ export interface Address {
     country: string
     phone: string
     city: string
+    id?: string | number
 }
 
 export default function Addresses() {
     const navigation = useNavigation()
-    const [addresses, setAddresses] = useState<[]>()
+    const [addresses, setAddresses] = useState<any>()
     const { auth } = useAuth()
+
+    const deleteAdress = (idAddress: string | number | undefined, titleAdress: string) => {
+        Alert.alert(
+            'Eliminar Direccion',
+            `Estas seguro que deseas eliminar la direccion ${titleAdress}?`,
+            [
+                {
+                    text: 'Si',
+                    onPress: async () => {
+                        const result = await deleteAdressApi(auth, idAddress)
+                        const newAddresses = (addresses as Address[]).reduce((acum: Address[], value: Address) => {
+                            if (value?.id === result.id) {
+                                return [...acum]
+                            }
+                            return [...acum, value]
+                        }, [])
+
+                        setAddresses(newAddresses)
+                    }
+                },
+                {
+                    text: 'No eliminar'
+                }
+            ],
+            { cancelable: false }
+        )
+    }
 
     const getMyAddresses = useCallback(() => {
         ;(async () => {
@@ -32,9 +61,9 @@ export default function Addresses() {
 
     useFocusEffect(getMyAddresses)
 
-    const returnWithAddresses = (addresses: Array<[]>) => {
+    const returnWithAddresses = (addresses: Array<Address>) => {
         if (addresses.length) {
-            return <Text>Listado de direcciones</Text>
+            return <AddressList addresses={addresses} deleteAdress={deleteAdress} />
         } else {
             return <Text style={styles.titleNotAdresses}>No tienes ninguna direccion, Crea una!</Text>
         }
@@ -45,7 +74,7 @@ export default function Addresses() {
             <Text style={styles.title}>Mis direcciones</Text>
             <TouchableWithoutFeedback onPress={() => navigation.navigate('add-address' as any)}>
                 <View style={styles.adAddress}>
-                    <Text style={styles.adAddressText}>Add Direction</Text>
+                    <Text style={styles.adAddressText}>Add address</Text>
                     <IconButton icon="arrow-right" color="#000" />
                 </View>
             </TouchableWithoutFeedback>
