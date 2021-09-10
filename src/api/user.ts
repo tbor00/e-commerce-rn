@@ -1,4 +1,4 @@
-import { HttpFetch, REACT_APP_CONTENT } from '../network/HttpFetch'
+import HttpFetch, { REACT_APP_CONTENT } from '../network/HttpFetch'
 
 export const registerUserApi = async (formData: any) => {
     return HttpFetch('POST', `${REACT_APP_CONTENT}/auth/local/register`, formData)

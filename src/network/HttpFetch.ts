@@ -1,4 +1,6 @@
-export const HttpFetch = async (method: string, url: string, body?: any, token?: string | undefined) => {
+import HttpClient from './HttpClient'
+
+const HttpFetch = async (method: string, url: string, body?: any, token?: string | undefined) => {
     try {
         let params
         if (body) {
@@ -37,3 +39,5 @@ export const HttpFetch = async (method: string, url: string, body?: any, token?:
 }
 
 export const REACT_APP_CONTENT = 'http://10.0.2.2:1337'
+
+export default HttpFetch

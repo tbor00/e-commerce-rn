@@ -49,7 +49,12 @@ export default function Menu() {
                     left={(props) => <List.Icon {...props} icon="key" />}
                     onPress={() => navigation.navigate('change-password-account' as any)}
                 />
-                <List.Item title="Mis direcciones" description="Administra tus direcciones de envio" left={(props) => <List.Icon {...props} icon="map" />} />
+                <List.Item
+                    title="Mis direcciones"
+                    description="Administra tus direcciones de envio"
+                    left={(props) => <List.Icon {...props} icon="map" />}
+                    onPress={() => navigation.navigate('addresses' as any)}
+                />
             </List.Section>
             <List.Section>
                 <List.Subheader>App</List.Subheader>
