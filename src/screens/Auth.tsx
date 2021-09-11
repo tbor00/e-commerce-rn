@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, Image, StyleSheet, KeyboardAvoidingView, Platform } from 'react-native'
-import { Button } from 'react-native-paper'
+import { View, Image, StyleSheet, KeyboardAvoidingView, Platform } from 'react-native'
 import Logo from '../../assets/logo.png'
 import { stylesGeneral } from '../styles/index'
 import RegisterForm from '../components/Auth/RegisterForm'

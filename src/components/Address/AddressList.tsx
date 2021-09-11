@@ -1,15 +1,17 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
-import { Address } from '../../screens/Account/Addresses'
+import { Address } from '../../models/Adress'
 import { List, Button } from 'react-native-paper'
 import { colors } from '../../styles/index'
 
 export default function AddressList({
     addresses,
-    deleteAdress
+    deleteAdress,
+    updateAdress
 }: {
     addresses: Address[]
     deleteAdress: (idAddress: string | number | undefined, titleAddres: string) => void
+    updateAdress: (idAddress: string | number | undefined) => void
 }) {
     return (
         <View style={styles.container}>
@@ -17,7 +19,7 @@ export default function AddressList({
                 <View style={styles.address}>
                     <List.Item key={id} title={title} description={address} left={(props) => <List.Icon {...props} icon="map-marker" />} />
                     <View style={styles.actions}>
-                        <Button icon="pencil" color={colors.primary}>
+                        <Button icon="pencil" color={colors.primary} onPress={() => updateAdress(id)}>
                             Editar
                         </Button>
                         <Button icon="delete" color={colors.danger} style={{ marginLeft: 5 }} onPress={() => deleteAdress(id, title)}>

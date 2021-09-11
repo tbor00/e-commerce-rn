@@ -1,10 +1,11 @@
 import HttpFetch, { REACT_APP_CONTENT } from '../network/HttpFetch'
+import { RegisterFormInterface, LoginFormInterface } from '../models/User'
 
-export const registerUserApi = async (formData: any) => {
+export const registerUserApi = async (formData: RegisterFormInterface) => {
     return HttpFetch('POST', `${REACT_APP_CONTENT}/auth/local/register`, formData)
 }
 
-export const loginUserApi = async (formData: any) => {
+export const loginUserApi = async (formData: LoginFormInterface) => {
     return HttpFetch('POST', `${REACT_APP_CONTENT}/auth/local`, formData)
 }
 

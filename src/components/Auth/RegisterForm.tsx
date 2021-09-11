@@ -6,9 +6,10 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { registerUserApi } from '../../api/user'
 import Toast from 'react-native-root-toast'
+import { RegisterFormInterface } from '../../models/User'
 
 export default function RegisterForm({ setShowLogin }: { setShowLogin?: any }) {
-    const initialValues: { email: string; username: string; password: string; repeatPassword: string } = {
+    const initialValues: RegisterFormInterface = {
         email: '',
         username: '',
         password: '',

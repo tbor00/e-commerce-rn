@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, SafeAreaView, ActivityIndicator } from 'react-n
 export default function Loading({ text, sizeLoading, colorLoading }: { text?: string; sizeLoading: number | 'small' | 'large'; colorLoading?: string }) {
     return (
         <SafeAreaView style={styles.container}>
-            <ActivityIndicator size={sizeLoading} color={colorLoading ?? '#000'} style={styles.loading} />
+            <ActivityIndicator size={sizeLoading} color={colorLoading ?? '#16222b'} style={styles.loading} />
             <Text>{text ?? 'Cargando...'}</Text>
         </SafeAreaView>
     )

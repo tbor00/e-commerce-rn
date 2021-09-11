@@ -9,9 +9,10 @@ import useAuth from '../../hooks/useAuth'
 import Loading from '../../components/Loading'
 import UserInfo from '../../components/Account/UserInfo'
 import Menu from '../../components/Account/Menu'
+import { UserInterface } from '../../models/User'
 
 export default function Account() {
-    const [user, setUser] = useState<any>()
+    const [user, setUser] = useState<Partial<UserInterface>>()
     const { auth } = useAuth()
     const { token } = auth as any
 

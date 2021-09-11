@@ -7,9 +7,10 @@ import * as Yup from 'yup'
 import { loginUserApi } from '../../api/user'
 import Toast from 'react-native-root-toast'
 import useAuth from '../../hooks/useAuth'
+import { LoginFormInterface } from '../../models/User'
 
-const LoginForm = ({ setShowLogin }: { setShowLogin?: any }) => {
-    const initialValues: { identifier: string; password: string } = {
+const LoginForm = ({ setShowLogin }: { setShowLogin: any }) => {
+    const initialValues: LoginFormInterface = {
         identifier: '',
         password: ''
     }

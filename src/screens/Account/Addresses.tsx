@@ -7,22 +7,12 @@ import useAuth from '../../hooks/useAuth'
 import Loading from '../../components/Loading'
 import { useNavigation } from '@react-navigation/native'
 import AddressList from '../../components/Address/AddressList'
-
-export interface Address {
-    title: string
-    name_lastname: string
-    address: string
-    postal_code: string
-    state: string
-    country: string
-    phone: string
-    city: string
-    id?: string | number
-}
+import { Address } from '../../models/Adress'
+import { Auth } from '../../models/Auth'
 
 export default function Addresses() {
     const navigation = useNavigation()
-    const [addresses, setAddresses] = useState<any>()
+    const [addresses, setAddresses] = useState<Address[]>()
     const { auth } = useAuth()
 
     const deleteAdress = (idAddress: string | number | undefined, titleAdress: string) => {
@@ -52,6 +42,10 @@ export default function Addresses() {
         )
     }
 
+    const updateAdress = (idAddress: string | number | undefined) => {
+        navigation.navigate({ name: 'add-address', params: { idAddress } } as any)
+    }
+
     const getMyAddresses = useCallback(() => {
         ;(async () => {
             const result = await getAdressesApi(auth)
@@ -63,7 +57,7 @@ export default function Addresses() {
 
     const returnWithAddresses = (addresses: Array<Address>) => {
         if (addresses.length) {
-            return <AddressList addresses={addresses} deleteAdress={deleteAdress} />
+            return <AddressList addresses={addresses} deleteAdress={deleteAdress} updateAdress={updateAdress} />
         } else {
             return <Text style={styles.titleNotAdresses}>No tienes ninguna direccion, Crea una!</Text>
         }

@@ -1,7 +1,8 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
+import { UserInterface } from '../../models/User'
 
-export default function UserInfo({ user }: { user?: any }) {
+export default function UserInfo({ user }: { user: Partial<UserInterface> }) {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Bienvenido,</Text>

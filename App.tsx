@@ -1,15 +1,15 @@
 import React, { useState, useMemo, useEffect } from 'react'
-import { Text, View } from 'react-native'
-import { Provider as PaperProvider, Button } from 'react-native-paper'
+import { Provider as PaperProvider } from 'react-native-paper'
 import Auth from './src/screens/Auth'
 import { RootSiblingParent } from 'react-native-root-siblings'
 import AuthContext from './src/context/AuthContext'
 import { setDateWithLocalStorage, getDateWithLocalStorage, removeItemLocalStorage } from './src/api/token'
 import jwtDecode from 'jwt-decode'
 import AppNavigation from './src/navigation/AppNavigation'
+import { Auth as AuthInterface } from './src/models/Auth'
 
 export default function App() {
-    const [auth, setAuth] = useState<any>(undefined)
+    const [auth, setAuth] = useState<Partial<AuthInterface> | any>(undefined)
 
     const login = (user: any) => {
         setDateWithLocalStorage('token', user.jwt).then(() => {
