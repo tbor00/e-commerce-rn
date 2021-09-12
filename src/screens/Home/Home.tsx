@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text } from 'react-native'
-import { stylesGeneral } from '../../styles/index'
+import { ScrollView } from 'react-native'
 import StatusBarCustom from '../../components/StatusBarCustom'
 import { colors } from '../../styles/index'
 import Search from '../../components/Search'
 import NewProducts from '../../components/Home/NewProducts'
+import Banner from '../../components/Home/Banner'
 
 export default function Home() {
     return (
         <>
             <StatusBarCustom backgroundColor={colors.bgDark} />
             <Search />
-            <View>
+            <ScrollView>
+                <Banner />
                 <NewProducts />
-            </View>
+            </ScrollView>
         </>
     )
 }

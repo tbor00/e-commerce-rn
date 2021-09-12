@@ -2,12 +2,12 @@ import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { ProductInterface } from '../../models/Product'
 
-export default function Price({ price, discount }: { price: ProductInterface['price']; discount?: ProductInterface['discount'] }) {
+export default function Price({ price, discount, quantity }: { price: ProductInterface['price']; discount?: ProductInterface['discount']; quantity: number }) {
     const calcPrice = (priceProd: ProductInterface['price'], discountProd: ProductInterface['discount']) => {
         if (!discountProd) return priceProd
 
         const discountAmount = (priceProd * discountProd) / 100
-        return (priceProd - discountAmount).toFixed(2)
+        return ((priceProd - discountAmount) * quantity).toFixed(2)
     }
 
     return (
@@ -30,7 +30,7 @@ export default function Price({ price, discount }: { price: ProductInterface['pr
                 <View style={styles.containerData}>
                     <Text style={styles.datatext}>Ahorras: </Text>
                     <Text style={[styles.dataValue, styles.saving]}>
-                        ${((price * discount) / 100).toFixed(2)} ({discount}%)
+                        ${((price * discount * quantity) / 100).toFixed(2)} ({discount}%)
                     </Text>
                 </View>
             )}

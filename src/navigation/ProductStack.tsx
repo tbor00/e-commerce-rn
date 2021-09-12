@@ -2,6 +2,7 @@ import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import Home from '../screens/Home/Home'
 import Product from '../screens/Home/Product'
+import Search from '../screens/Home/Search'
 import { colors } from '../styles'
 
 const Stack = createStackNavigator()
@@ -19,6 +20,7 @@ export default function ProductStack() {
         >
             <Stack.Screen name="home" component={Home} options={{ headerShown: false }} />
             <Stack.Screen name="product" component={Product} options={{ headerShown: false }} />
+            <Stack.Screen name="search" component={Search} options={{ headerShown: false }} />
         </Stack.Navigator>
     )
 }

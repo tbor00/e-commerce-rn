@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, StyleSheet, ScrollView } from 'react-native'
+import { View, Text, StyleSheet, ScrollView, SafeAreaView } from 'react-native'
 import { findOneProductApi } from '../../api/product'
 import { ProductInterface } from '../../models/Product'
 import StatusBarCustomComponent from '../../components/StatusBarCustom'
@@ -8,6 +8,9 @@ import Search from '../../components/Search'
 import Loading from '../../components/Loading'
 import CarrouselImages from '../../components/Product/CarrouselImages'
 import Price from '../../components/Product/Price'
+import Quantity from '../../components/Product/Quantity'
+import Buy from '../../components/Product/Buy'
+import AddFavorites from '../../components/Product/AddFavorites'
 
 export default function Product(props: any) {
     // Triple destructuring
@@ -18,6 +21,18 @@ export default function Product(props: any) {
     } = props
     const [product, setProduct] = useState<ProductInterface>()
     const [imageCarousel, setImageCarousel] = useState<any>()
+    const [quantity, setQuantity] = useState<number>(1)
+    const [priceFinal, setPriceFinal] = useState<string | number>()
+
+    const getPriceDiscount = () => {
+        if (product?.discount) {
+            const discountAmount = (product.price * product?.discount) / 100
+            let discount = ((product.price - discountAmount) * quantity).toFixed(2)
+            setPriceFinal(discount)
+        } else {
+            setPriceFinal(product?.price)
+        }
+    }
 
     useEffect(() => {
         ;(async () => {
@@ -43,7 +58,12 @@ export default function Product(props: any) {
                         <Text style={styles.title}>{product.title}</Text>
                         {imageCarousel && <CarrouselImages images={imageCarousel} />}
                         <View style={styles.containerView}>
-                            <Price price={product.price} discount={product.discount} />
+                            <Price price={product.price} discount={product.discount} quantity={quantity} />
+                            <Quantity quantity={quantity} setQuantity={setQuantity} />
+                            <View style={{ zIndex: 1 }}>
+                                <Buy product={product} />
+                                <AddFavorites product={product} />
+                            </View>
                         </View>
                     </ScrollView>
                 )
@@ -65,6 +85,7 @@ const styles = StyleSheet.create({
         marginBottom: 20
     },
     containerView: {
-        padding: 10
+        padding: 10,
+        marginBottom: 20
     }
 })
