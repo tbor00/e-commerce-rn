@@ -16,8 +16,8 @@ export default function AddressList({
     return (
         <View style={styles.container}>
             {addresses.map(({ title, id, address }) => (
-                <View style={styles.address}>
-                    <List.Item key={id} title={title} description={address} left={(props) => <List.Icon {...props} icon="map-marker" />} />
+                <View style={styles.address} key={id}>
+                    <List.Item title={title} description={address} left={(props) => <List.Icon {...props} icon="map-marker" />} />
                     <View style={styles.actions}>
                         <Button icon="pencil" color={colors.primary} onPress={() => updateAdress(id)}>
                             Editar

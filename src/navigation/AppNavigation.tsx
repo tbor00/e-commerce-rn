@@ -4,17 +4,17 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import { StyleSheet } from 'react-native'
 import AwesomeIcon from 'react-native-vector-icons/FontAwesome'
 import { colors } from '../styles/index'
-import Home from '../screens/Home'
 import Favorites from '../screens/Favorites'
 import Cart from '../screens/Cart'
 import AccountStack from './AccountStack'
+import ProductStack from './ProductStack'
 
 const AppNavigation = () => {
     const setIcon = (route: any, routerStatus: any) => {
         let iconName = ''
 
         switch (route.name) {
-            case 'home':
+            case 'home-stack':
                 iconName = 'home'
                 break
             case 'favorites':
@@ -45,7 +45,7 @@ const AppNavigation = () => {
                     }
                 })}
             >
-                <Tab.Screen name="home" component={Home} options={{ title: 'Inicio' }} />
+                <Tab.Screen name="home-stack" component={ProductStack} options={{ title: 'Inicio' }} />
                 <Tab.Screen name="favorites" component={Favorites} options={{ title: 'Favoritos' }} />
                 <Tab.Screen name="cart" component={Cart} options={{ title: 'Carrito' }} />
                 <Tab.Screen name="account-stack" component={AccountStack} options={{ title: 'Cuenta' }} />

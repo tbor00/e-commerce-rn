@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 import { TextInput, Button } from 'react-native-paper'
 import { formStyles } from '../../styles/index'
 import { useFormik } from 'formik'

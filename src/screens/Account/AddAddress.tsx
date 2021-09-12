@@ -6,7 +6,7 @@ import { formStyles } from '../../styles/index'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { Address } from '../../models/Adress'
-import { addAddressApi, findOneAddressApi } from '../../api/addresses'
+import { addAddressApi, findOneAddressApi, updateAdressApi } from '../../api/addresses'
 import useAuth from '../../hooks/useAuth'
 import Toast from 'react-native-root-toast'
 import { useNavigation, useFocusEffect } from '@react-navigation/native'
@@ -50,13 +50,13 @@ export default function AddAddress(props: any) {
         validationSchema: Yup.object(validationSchema),
         onSubmit: async (formData) => {
             setLoading(true)
-            const result = await addAddressApi(auth, formData)
+            const result = route?.params?.idAddress ? await updateAdressApi(auth, formData) : await addAddressApi(auth, formData)
             if (result.error) {
                 Toast.show('Error al Cargar la direccion, intente nuevamente!', {
                     position: Toast.positions.CENTER
                 })
             } else {
-                Toast.show('Se agrego la direccion satisfactoriamente', {
+                Toast.show(route?.params?.idAddress ? ' Se edito correctamente la direccion' : 'Se agrego la direccion satisfactoriamente', {
                     position: Toast.positions.CENTER
                 })
                 navigation.goBack()
@@ -72,6 +72,7 @@ export default function AddAddress(props: any) {
             ;(async () => {
                 const result = await findOneAddressApi(auth, route?.params.idAddress)
                 if (!result.error) {
+                    formik.setFieldValue('_id', result._id)
                     formik.setFieldValue('title', result.title)
                     formik.setFieldValue('name_lastname', result.name_lastname)
                     formik.setFieldValue('address', result.address)

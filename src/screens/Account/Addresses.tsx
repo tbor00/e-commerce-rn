@@ -8,7 +8,6 @@ import Loading from '../../components/Loading'
 import { useNavigation } from '@react-navigation/native'
 import AddressList from '../../components/Address/AddressList'
 import { Address } from '../../models/Adress'
-import { Auth } from '../../models/Auth'
 
 export default function Addresses() {
     const navigation = useNavigation()
@@ -21,7 +20,7 @@ export default function Addresses() {
             `Estas seguro que deseas eliminar la direccion ${titleAdress}?`,
             [
                 {
-                    text: 'Si',
+                    text: 'Eliminar',
                     onPress: async () => {
                         const result = await deleteAdressApi(auth, idAddress)
                         const newAddresses = (addresses as Address[]).reduce((acum: Address[], value: Address) => {
@@ -35,7 +34,7 @@ export default function Addresses() {
                     }
                 },
                 {
-                    text: 'No eliminar'
+                    text: 'Cancelar'
                 }
             ],
             { cancelable: false }
