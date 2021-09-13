@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { ScrollView } from 'react-native'
+import { ScrollView, StyleSheet } from 'react-native'
 import StatusBarCustom from '../../components/StatusBarCustom'
 import { colors } from '../../styles/index'
 import Search from '../../components/Search'
@@ -18,3 +18,9 @@ export default function Home() {
         </>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        position: 'relative'
+    }
+})

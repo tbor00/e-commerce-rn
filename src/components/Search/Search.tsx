@@ -7,9 +7,9 @@ import { useNavigation } from '@react-navigation/native'
 import SearchHistory from './SearchHistory'
 import { updateSearchHistoryApi } from '../../api/search'
 
-export default function Search() {
+export default function Search({ currentSearch }: { currentSearch?: string }) {
     const navigation = useNavigation()
-    const [searchQuery, setSearchQuery] = useState('')
+    const [searchQuery, setSearchQuery] = useState(currentSearch ?? '')
     const [showHistory, setShowHistory] = useState(false)
     const [containerHeight, setContainerHeight] = useState(0)
 
@@ -48,8 +48,7 @@ export default function Search() {
                     />
                 </Animated.View>
             </View>
-
-            <SearchHistory showHistory={showHistory} containerHeight={containerHeight} />
+            <SearchHistory showHistory={showHistory} containerHeight={containerHeight} closeSearch={closeSearch} />
         </View>
     )
 }
@@ -59,7 +58,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.bgDark,
         paddingVertical: 10,
         paddingHorizontal: 20,
-        zIndex: 1
+        zIndex: 2
     },
     containerInput: {
         position: 'relative',

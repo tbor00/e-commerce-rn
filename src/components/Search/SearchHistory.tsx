@@ -1,12 +1,27 @@
 import React, { useEffect, useState, useCallback } from 'react'
-import { View, Text, StyleSheet, Dimensions, TouchableWithoutFeedback, ScrollView } from 'react-native'
+import { View, Text, StyleSheet, Dimensions, TouchableWithoutFeedback } from 'react-native'
 import { colors } from '../../styles/index'
 import { getSearchHistoryApi } from '../../api/search'
 import AwesomeIcon from 'react-native-vector-icons/FontAwesome'
 import { useFocusEffect } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native'
 
-export default function SearchHistory({ showHistory, containerHeight }: { showHistory: boolean; containerHeight: number }) {
+export default function SearchHistory({
+    showHistory,
+    containerHeight,
+    closeSearch
+}: {
+    showHistory: boolean
+    containerHeight: number
+    closeSearch: () => void
+}) {
     const [history, setHistory] = useState<{ date: Date; search: string }[]>()
+    const navigation = useNavigation()
+
+    const findProduct = (search: string) => {
+        navigation.navigate({ name: 'search', params: { searchQuery: search } } as any)
+        closeSearch()
+    }
 
     const getSearch = useCallback(() => {
         if (showHistory) {
@@ -20,10 +35,10 @@ export default function SearchHistory({ showHistory, containerHeight }: { showHi
     useFocusEffect(getSearch)
 
     return (
-        <View style={[showHistory ? styles.history : styles.hidden, { top: containerHeight, elevation: 3 }]}>
+        <View style={[showHistory ? styles.history : styles.hidden]}>
             {history &&
                 history.map(({ search }, index) => (
-                    <TouchableWithoutFeedback key={index} onPress={() => console.log('ASd')}>
+                    <TouchableWithoutFeedback key={index} onPress={() => findProduct(search)}>
                         <View style={styles.historyItem}>
                             <Text>{search}</Text>
                             <AwesomeIcon name="arrow-right" size={16} />
@@ -39,10 +54,12 @@ const styles = StyleSheet.create({
         display: 'none'
     },
     history: {
-        position: 'absolute',
+        position: 'relative',
         backgroundColor: colors.bgLight,
         width: Dimensions.get('window').width,
-        height: Dimensions.get('window').height
+        height: Dimensions.get('window').height,
+        right: 19,
+        top: 2
     },
     historyItem: {
         paddingVertical: 15,
